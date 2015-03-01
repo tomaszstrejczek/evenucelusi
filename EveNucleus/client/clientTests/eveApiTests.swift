@@ -84,6 +84,14 @@ class eveApiTests: XCTestCase {
     }
     
     func testEveCharacterWithError() {
+        var data = "<?xml version='1.0' encoding='UTF-8'?>\r\n<eveapi version=\"2\">)"
         
+        var t = EveResponse<EveCharacter>()
+        var err = t.Parse(data)
+        
+        XCTAssert(err != nil)
+        var line = err!.userInfo["Line"] as Int
+        XCTAssertEqual(Int(2), line)
+       
     }
 }
