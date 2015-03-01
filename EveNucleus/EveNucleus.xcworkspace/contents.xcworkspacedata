@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:client/client.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:EveNucleus.xcodeproj">
    </FileRef>
    <FileRef
