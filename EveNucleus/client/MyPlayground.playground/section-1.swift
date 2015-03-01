@@ -44,25 +44,6 @@ let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data: 
 
 //dataTask.resume()
 
-extension NSObject {
-    subscript(key: String) -> NSObject? {
-        get {
-            return self.valueForKeyPath(key) as? NSObject
-        }
-        set(newValue) {
-            self.setValue(newValue, forKeyPath: key)
-        }
-    }
-    func keyPathsForValuesAffectingValueForKey(key: String!) -> NSSet! {
-        return nil
-    }
-    func automaticallyNotifiesObserversForKey(key: String!) -> Bool {
-        return true
-    }
-    func addObserver(observer: NSObject!, forKeyPath keyPath: String!) {
-        self.addObserver(observer, forKeyPath: keyPath, options: nil, context: nil)
-    }
-}
 
 var data = "<?xml version='1.0' encoding='UTF-8'?>\r\n<eveapi version=\"2\">\r\n  <currentTime>2015-02-28 21:02:51</currentTime>\r\n  <result>\r\n    <rowset name=\"characters\" key=\"characterID\" columns=\"name,characterID,corporationName,corporationID,allianceID,allianceName,factionID,factionName\">\r\n      <row name=\"a99990 Pappotte\" characterID=\"93860977\" corporationName=\"My Random Corporation\" corporationID=\"98325162\" allianceID=\"0\" allianceName=\"\" factionID=\"0\" factionName=\"\" />\r\n      <row name=\"Justine Mati\" characterID=\"95304127\" corporationName=\"My Random Corporation\" corporationID=\"98325162\" allianceID=\"0\" allianceName=\"\" factionID=\"0\" factionName=\"\" />\r\n      <row name=\"stryju\" characterID=\"1681153044\" corporationName=\"Brave Newbies Inc.\" corporationID=\"98169165\" allianceID=\"99003214\" allianceName=\"Brave Collective\" factionID=\"0\" factionName=\"\" />\r\n    </rowset>\r\n  </result>\r\n  <cachedUntil>2015-02-28 21:13:00</cachedUntil>\r\n</eveapi>"
 

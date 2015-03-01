@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 protocol IResponseMapper {
     func setCachedUnti(date:NSDate)
     func setCurrentTime(date:NSDate)
@@ -63,7 +64,6 @@ class ResponseMapper<T:NSObject>: IResponseMapper {
             }
         }
     }
-    
 }
 
 
@@ -76,16 +76,15 @@ class EveParser: NSObject, NSXMLParserDelegate {
         super.init()
     }
     
-    func Parse(data: String) {
+    func Parse(data: String) -> Error? {
         var nsdata = data.dataUsingEncoding(NSUTF8StringEncoding)
         var parser = NSXMLParser(data: nsdata)
         parser.delegate = self
-        parser.parse()
-        
-        parser.parserError?.description
-        parser.parserError?.code
-        parser.lineNumber
-        parser.columnNumber
+        if !parser.parse() {
+            return Error(code: parser.parserError?.code ?? 0, domain: "EveParser::Parse", userInfo: ["Line":parser.lineNumber, "Column":parser.columnNumber, "Description":parser.parserError?.description])
+        }
+
+        return nil
     }
     
     
@@ -111,13 +110,17 @@ class EveParser: NSObject, NSXMLParserDelegate {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             var val = dateFormatter.dateFromString(currentValue)
-            toset.setCurrentTime(val!)
+            if val != nil {
+                toset.setCurrentTime(val!)
+            }
             break;
         case "cachedUntil":
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             var val = dateFormatter.dateFromString(currentValue)
-            toset.setCachedUnti(val!)
+            if val != nil {
+                toset.setCachedUnti(val!)
+            }
             break;
         default:
             break;
@@ -130,15 +133,17 @@ class EveParser: NSObject, NSXMLParserDelegate {
 }
 
 public class EveResponse<T:NSObject>: NSObject {
-    var currentTime = NSDate()
-    var cachedUntil = NSDate()
-    var rows = Array<T>()
+    public var currentTime = NSDate()
+    public var cachedUntil = NSDate()
+    public var rows = Array<T>()
     
-    
-    func Parse(data: String) {
-        var mapper = ResponseMapper<T>(res: self)
-        var p = EveParser(mapper: mapper)
-        p.Parse(data)
+    public override init() {
+        super.init()
     }
     
+    public func Parse(data: String) -> Error? {
+        var mapper = ResponseMapper<T>(res: self)
+        var p = EveParser(mapper: mapper)
+        return p.Parse(data)
+    }
 }

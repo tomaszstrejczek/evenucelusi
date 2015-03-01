@@ -11,7 +11,12 @@
 		4260C3721AA385DE00563DDD /* EveParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3711AA385DE00563DDD /* EveParsing.swift */; };
 		4260C3741AA387D900563DDD /* EveApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3731AA387D900563DDD /* EveApi.swift */; };
 		4260C3761AA3881400563DDD /* eveApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3751AA3881400563DDD /* eveApiTests.swift */; };
-		42EFA9281AA33BA000A64803 /* client.h in Headers */ = {isa = PBXBuildFile; fileRef = 42EFA9271AA33BA000A64803 /* client.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4260C3771AA38EE800563DDD /* EveApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3731AA387D900563DDD /* EveApi.swift */; };
+		4260C3781AA38EE800563DDD /* EveParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3711AA385DE00563DDD /* EveParsing.swift */; };
+		4260C3791AA38EE800563DDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C36F1AA3857800563DDD /* Extensions.swift */; };
+		4260C37A1AA38EE800563DDD /* IEveApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFA93E1AA33BCF00A64803 /* IEveApi.swift */; };
+		429A37BA1AA3A339008F95EE /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429A37B91AA3A339008F95EE /* Error.swift */; };
+		429A37BB1AA3A339008F95EE /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429A37B91AA3A339008F95EE /* Error.swift */; };
 		42EFA92E1AA33BA000A64803 /* client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EFA9221AA33BA000A64803 /* client.framework */; };
 		42EFA9351AA33BA000A64803 /* clientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFA9341AA33BA000A64803 /* clientTests.swift */; };
 		42EFA93F1AA33BCF00A64803 /* IEveApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFA93E1AA33BCF00A64803 /* IEveApi.swift */; };
@@ -32,9 +37,9 @@
 		4260C3711AA385DE00563DDD /* EveParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveParsing.swift; sourceTree = "<group>"; };
 		4260C3731AA387D900563DDD /* EveApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveApi.swift; sourceTree = "<group>"; };
 		4260C3751AA3881400563DDD /* eveApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eveApiTests.swift; sourceTree = "<group>"; };
+		429A37B91AA3A339008F95EE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		42EFA9221AA33BA000A64803 /* client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EFA9261AA33BA000A64803 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		42EFA9271AA33BA000A64803 /* client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		42EFA92D1AA33BA000A64803 /* clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EFA9331AA33BA000A64803 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42EFA9341AA33BA000A64803 /* clientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clientTests.swift; sourceTree = "<group>"; };
@@ -83,7 +88,7 @@
 		42EFA9241AA33BA000A64803 /* client */ = {
 			isa = PBXGroup;
 			children = (
-				42EFA9271AA33BA000A64803 /* client.h */,
+				429A37B91AA3A339008F95EE /* Error.swift */,
 				4260C3731AA387D900563DDD /* EveApi.swift */,
 				4260C3711AA385DE00563DDD /* EveParsing.swift */,
 				4260C36F1AA3857800563DDD /* Extensions.swift */,
@@ -126,7 +131,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42EFA9281AA33BA000A64803 /* client.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429A37BA1AA3A339008F95EE /* Error.swift in Sources */,
 				42EFA93F1AA33BCF00A64803 /* IEveApi.swift in Sources */,
 				4260C3741AA387D900563DDD /* EveApi.swift in Sources */,
 				4260C3701AA3857800563DDD /* Extensions.swift in Sources */,
@@ -237,6 +242,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4260C3771AA38EE800563DDD /* EveApi.swift in Sources */,
+				4260C3781AA38EE800563DDD /* EveParsing.swift in Sources */,
+				429A37BB1AA3A339008F95EE /* Error.swift in Sources */,
+				4260C3791AA38EE800563DDD /* Extensions.swift in Sources */,
+				4260C37A1AA38EE800563DDD /* IEveApi.swift in Sources */,
 				42EFA9351AA33BA000A64803 /* clientTests.swift in Sources */,
 				4260C3761AA3881400563DDD /* eveApiTests.swift in Sources */,
 			);

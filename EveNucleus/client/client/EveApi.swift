@@ -10,16 +10,16 @@ import Foundation
 
 
 public class EveCharacter: NSObject {
-    var name: NSString
-    var characterID: UInt64
-    var corporationName: NSString
-    var corporationID: UInt64
-    var allianceID: UInt64
-    var allianceName: NSString
-    var factionID: UInt64
-    var factionName: NSString
+    public var name: NSString
+    public var characterID: UInt64
+    public var corporationName: NSString
+    public var corporationID: UInt64
+    public var allianceID: UInt64
+    public var allianceName: NSString
+    public var factionID: UInt64
+    public var factionName: NSString
     
-    override init() {
+    public override init() {
         name = ""
         characterID = 0
         corporationName = ""
