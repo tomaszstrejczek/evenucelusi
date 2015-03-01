@@ -32,7 +32,58 @@ class eveApiTests: XCTestCase {
         XCTAssert(err == nil)
         
         var cal = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+        XCTAssertEqual(2015, cal!.component(NSCalendarUnit.CalendarUnitYear, fromDate: t.cachedUntil))
         XCTAssertEqual(2, cal!.component(NSCalendarUnit.CalendarUnitMonth, fromDate: t.cachedUntil))
+        XCTAssertEqual(28, cal!.component(NSCalendarUnit.CalendarUnitDay, fromDate: t.cachedUntil))
+        XCTAssertEqual(21, cal!.component(NSCalendarUnit.CalendarUnitHour, fromDate: t.cachedUntil))
+        XCTAssertEqual(13, cal!.component(NSCalendarUnit.CalendarUnitMinute, fromDate: t.cachedUntil))
+        XCTAssertEqual(0, cal!.component(NSCalendarUnit.CalendarUnitSecond, fromDate: t.cachedUntil))
+
+        XCTAssertEqual(2015, cal!.component(NSCalendarUnit.CalendarUnitYear, fromDate: t.currentTime))
+        XCTAssertEqual(2, cal!.component(NSCalendarUnit.CalendarUnitMonth, fromDate: t.currentTime))
+        XCTAssertEqual(28, cal!.component(NSCalendarUnit.CalendarUnitDay, fromDate: t.currentTime))
+        XCTAssertEqual(21, cal!.component(NSCalendarUnit.CalendarUnitHour, fromDate: t.currentTime))
+        XCTAssertEqual(2, cal!.component(NSCalendarUnit.CalendarUnitMinute, fromDate: t.currentTime))
+        XCTAssertEqual(51, cal!.component(NSCalendarUnit.CalendarUnitSecond, fromDate: t.currentTime))
+        
+        XCTAssertEqual(3, t.rows.count)
+        
+        var dict = Utils.toDictionary(t.rows) { ($0.name, $0) }
+        XCTAssertNotNil(dict["a99990 Pappotte"])
+        var s = dict["a99990 Pappotte"]!
+        XCTAssertEqual(UInt64(93860977), s.characterID)
+        XCTAssertEqual("My Random Corporation", s.corporationName)
+        XCTAssertEqual(UInt64(98325162), s.corporationID)
+        XCTAssertEqual("", s.allianceName)
+        XCTAssertEqual(UInt64(0), s.allianceID)
+        XCTAssertEqual(UInt64(0), s.factionID)
+        XCTAssertEqual("", s.factionName)
+        
+        XCTAssertNotNil(dict["stryju"])
+        s = dict["stryju"]!
+        XCTAssertEqual(UInt64(1681153044), s.characterID)
+        XCTAssertEqual("Brave Newbies Inc.", s.corporationName)
+        XCTAssertEqual(UInt64(98169165), s.corporationID)
+        XCTAssertEqual("Brave Collective", s.allianceName)
+        XCTAssertEqual(UInt64(99003214), s.allianceID)
+        XCTAssertEqual(UInt64(0), s.factionID)
+        XCTAssertEqual("", s.factionName)
+        
+        
+        XCTAssertNotNil(dict["Justine Mati"])
+        s = dict["Justine Mati"]!
+        XCTAssertEqual(UInt64(95304127), s.characterID)
+        XCTAssertEqual("My Random Corporation", s.corporationName)
+        XCTAssertEqual(UInt64(98325162), s.corporationID)
+        XCTAssertEqual(UInt64(0), s.allianceID)
+        XCTAssertEqual("", s.allianceName)
+        XCTAssertEqual(UInt64(0), s.factionID)
+        XCTAssertEqual("", s.factionName)
+
+        XCTAssertNil(dict["test"])
+    }
+    
+    func testEveCharacterWithError() {
         
     }
 }

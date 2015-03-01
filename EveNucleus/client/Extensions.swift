@@ -36,3 +36,4 @@ extension NSObject {
         self.addObserver(observer, forKeyPath: keyPath, options: nil, context: nil)
     }
 }
+

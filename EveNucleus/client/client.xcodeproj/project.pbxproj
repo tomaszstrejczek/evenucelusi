@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4214EAB81AA3B29F004CFD56 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214EAB71AA3B29F004CFD56 /* Utils.swift */; };
+		4214EAB91AA3B29F004CFD56 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214EAB71AA3B29F004CFD56 /* Utils.swift */; };
 		4260C3701AA3857800563DDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C36F1AA3857800563DDD /* Extensions.swift */; };
 		4260C3721AA385DE00563DDD /* EveParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3711AA385DE00563DDD /* EveParsing.swift */; };
 		4260C3741AA387D900563DDD /* EveApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260C3731AA387D900563DDD /* EveApi.swift */; };
@@ -33,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4214EAB71AA3B29F004CFD56 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4260C36F1AA3857800563DDD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../Extensions.swift; sourceTree = "<group>"; };
 		4260C3711AA385DE00563DDD /* EveParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveParsing.swift; sourceTree = "<group>"; };
 		4260C3731AA387D900563DDD /* EveApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveApi.swift; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 				4260C3711AA385DE00563DDD /* EveParsing.swift */,
 				4260C36F1AA3857800563DDD /* Extensions.swift */,
 				42EFA93E1AA33BCF00A64803 /* IEveApi.swift */,
+				4214EAB71AA3B29F004CFD56 /* Utils.swift */,
 				42EFA9251AA33BA000A64803 /* Supporting Files */,
 			);
 			path = client;
@@ -235,6 +239,7 @@
 				4260C3741AA387D900563DDD /* EveApi.swift in Sources */,
 				4260C3701AA3857800563DDD /* Extensions.swift in Sources */,
 				4260C3721AA385DE00563DDD /* EveParsing.swift in Sources */,
+				4214EAB81AA3B29F004CFD56 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +254,7 @@
 				4260C37A1AA38EE800563DDD /* IEveApi.swift in Sources */,
 				42EFA9351AA33BA000A64803 /* clientTests.swift in Sources */,
 				4260C3761AA3881400563DDD /* eveApiTests.swift in Sources */,
+				4214EAB91AA3B29F004CFD56 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

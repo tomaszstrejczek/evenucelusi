@@ -38,7 +38,7 @@ class ResponseMapper<T:NSObject>: IResponseMapper {
     func setRowValue(name: String, value: String) {
         var tp = fields[name]
         if tp == nil {return;}
-        
+
         var row = result.rows.last!
         var val = row[name]
         
