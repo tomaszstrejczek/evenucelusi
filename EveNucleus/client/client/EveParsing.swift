@@ -76,15 +76,16 @@ class EveParser: NSObject, NSXMLParserDelegate {
         super.init()
     }
     
-    func Parse(data: String) -> Error? {
+    func Parse(data: String) -> Failable {
         var nsdata = data.dataUsingEncoding(NSUTF8StringEncoding)
         var parser = NSXMLParser(data: nsdata)
         parser.delegate = self
         if !parser.parse() {
-            return Error(code: parser.parserError?.code ?? 0, domain: "EveParser::Parse", userInfo: ["Line":parser.lineNumber, "Column":parser.columnNumber, "Description":parser.parserError?.description])
+            var err = Error(code: parser.parserError?.code ?? 0, domain: "EveParser::Parse", userInfo: ["Line":parser.lineNumber, "Column":parser.columnNumber, "Description":parser.parserError?.description])
+            return Failable(err)
         }
 
-        return nil
+        return Failable()
     }
     
     
@@ -141,7 +142,7 @@ public class EveResponse<T:NSObject>: NSObject {
         super.init()
     }
     
-    public func Parse(data: String) -> Error? {
+    public func Parse(data: String) -> Failable {
         var mapper = ResponseMapper<T>(res: self)
         var p = EveParser(mapper: mapper)
         return p.Parse(data)

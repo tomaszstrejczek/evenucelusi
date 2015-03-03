@@ -29,7 +29,7 @@ class eveApiTests: XCTestCase {
         var t = EveResponse<EveCharacter>()
         var err = t.Parse(data)
         
-        XCTAssert(err == nil)
+        XCTAssert(!err.failed)
         
         var cal = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         XCTAssertEqual(2015, cal!.component(NSCalendarUnit.CalendarUnitYear, fromDate: t.cachedUntil))
@@ -89,8 +89,8 @@ class eveApiTests: XCTestCase {
         var t = EveResponse<EveCharacter>()
         var err = t.Parse(data)
         
-        XCTAssert(err != nil)
-        var line = err!.userInfo["Line"] as Int
+        XCTAssert(err.failed)
+        var line = err.error!.userInfo["Line"] as Int
         XCTAssertEqual(Int(2), line)
        
     }

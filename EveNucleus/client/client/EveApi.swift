@@ -30,3 +30,11 @@ public class EveCharacter: NSObject {
         factionName = ""
     }
 }
+
+public class EveApi: IEveApi {
+    public func CheckKey(key: UInt64, vcode: String) -> FailableOf<Bool> {
+        
+        return FailableOf<Bool>(false)
+    }
+    
+}

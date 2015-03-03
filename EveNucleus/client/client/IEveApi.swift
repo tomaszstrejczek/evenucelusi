@@ -9,6 +9,6 @@
 import Foundation
 
 public protocol IEveApi {
-    func CheckKey(key: UInt64, vcode: String) -> Bool
+    func CheckKey(key: UInt64, vcode: String) -> FailableOf<Bool>
 }
 
