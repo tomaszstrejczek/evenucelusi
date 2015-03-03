@@ -77,7 +77,7 @@ class EveParser: NSObject, NSXMLParserDelegate {
     }
     
     func Parse(data: String) -> Failable {
-        var nsdata = data.dataUsingEncoding(NSUTF8StringEncoding)
+        var nsdata = data.dataUsingEncoding(NSUTF8StringEncoding)!
         var parser = NSXMLParser(data: nsdata)
         parser.delegate = self
         if !parser.parse() {
@@ -91,7 +91,7 @@ class EveParser: NSObject, NSXMLParserDelegate {
     
     var currentValue = NSMutableString()
     
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         currentValue = ""
         if elementName == "row" {
             toset.nextRow()
@@ -99,18 +99,18 @@ class EveParser: NSObject, NSXMLParserDelegate {
             for elem in dict {
                 var key = elem.key as NSMutableString
                 var value = elem.value as NSMutableString
-                toset.setRowValue(key, value:value)
+                toset.setRowValue(key as String, value:value as String)
             }
         }
     }
     
     
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         switch(elementName) {
         case "currentTime":
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            var val = dateFormatter.dateFromString(currentValue)
+            var val = dateFormatter.dateFromString(currentValue as String)
             if val != nil {
                 toset.setCurrentTime(val!)
             }
@@ -118,7 +118,7 @@ class EveParser: NSObject, NSXMLParserDelegate {
         case "cachedUntil":
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            var val = dateFormatter.dateFromString(currentValue)
+            var val = dateFormatter.dateFromString(currentValue as String)
             if val != nil {
                 toset.setCachedUnti(val!)
             }
@@ -128,8 +128,8 @@ class EveParser: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
-        currentValue.appendString(string)
+    func parser(parser: NSXMLParser, foundCharacters string: String?) {
+        currentValue.appendString(string!)
     }
 }
 

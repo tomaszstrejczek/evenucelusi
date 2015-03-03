@@ -32,9 +32,63 @@ public class EveCharacter: NSObject {
 }
 
 public class EveApi: IEveApi {
-    public func CheckKey(key: UInt64, vcode: String) -> FailableOf<Bool> {
+    let baseurl=NSURL(string:"https://api.eveonline.com/")
+    
+    public func GetCharacters(key: UInt64, vcode: String) -> FailableOf<EveResponse<EveCharacter>> {
+        var funcurl = "/account/Characters.xml.aspx?keyID=\(key)&vCode=\(vcode)"
         
-        return FailableOf<Bool>(false)
+        
+        var url = NSURL(string: funcurl, relativeToURL:baseurl)
+        
+        let session = NSURLSession.sharedSession()
+
+        let request = NSMutableURLRequest(URL: url!)
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.HTTPMethod = "POST"
+        
+        var rs: FailableOf<EveResponse<EveCharacter>>?
+        
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data: NSData!, response:NSURLResponse!,
+            error: NSError!) -> Void in
+            
+            if let rsp = response as NSHTTPURLResponse? {
+                if (rsp.statusCode == 200) {
+                    var t = EveResponse<EveCharacter>()
+                    var data = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                    var result = t.Parse(data as String)
+                    if !result.failed {
+                        rs = FailableOf<EveResponse<EveCharacter>>(t)
+                    }
+                    else {
+                        rs = FailableOf<EveResponse<EveCharacter>>(result.error!)
+                    }
+                }
+                else {
+                    var err = Error(code: rsp.statusCode, domain: "EveApi::GetCharacters", userInfo: ["Description":"Invalid return code \(rsp.statusCode)"])
+                    rs = FailableOf<EveResponse<EveCharacter>>(err)
+                }
+            }
+            else {
+                var err = Error(code: error.code, domain: "EveApi::GetCharacters", userInfo: ["Description":error.description])
+                rs = FailableOf<EveResponse<EveCharacter>>(err)
+            }
+            
+        })
+        
+        dataTask.resume()
+        while(dataTask.state == NSURLSessionTaskState.Running) {
+            sleep(2)
+        }
+        
+        return rs!
+    }
+    
+    public func CheckKey(key: UInt64, vcode: String) -> FailableOf<Bool> {
+        var result = GetCharacters(key, vcode: vcode)
+        if !result.failed {
+            return FailableOf<Bool>(true)
+        }
+        return FailableOf<Bool>(result.error!)
     }
     
 }

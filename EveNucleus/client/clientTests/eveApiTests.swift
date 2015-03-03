@@ -92,6 +92,49 @@ class eveApiTests: XCTestCase {
         XCTAssert(err.failed)
         var line = err.error!.userInfo["Line"] as Int
         XCTAssertEqual(Int(2), line)
-       
     }
+    
+    func testGetCharacters() {
+        var key=UInt64(4107075)
+        var vcode="R27d16Sq1v1yrO8ViWBGdhS8uFftxiUONcPMH8m9vzbaxy6NoOGIwsMpuk0Vra2N"
+        var api = EveApi()
+
+        var t = api.GetCharacters(key, vcode: vcode)
+        XCTAssert(!t.failed)
+        
+        XCTAssertEqual(3, t.value!.rows.count)
+        
+        var dict = Utils.toDictionary(t.value!.rows) { ($0.name, $0) }
+        XCTAssertNotNil(dict["a99990 Pappotte"])
+        var s = dict["a99990 Pappotte"]!
+        XCTAssertEqual(UInt64(93860977), s.characterID)
+        XCTAssertEqual("My Random Corporation", s.corporationName)
+        XCTAssertEqual(UInt64(98325162), s.corporationID)
+        XCTAssertEqual("", s.allianceName)
+        XCTAssertEqual(UInt64(0), s.allianceID)
+        XCTAssertEqual(UInt64(0), s.factionID)
+        XCTAssertEqual("", s.factionName)
+        
+        XCTAssertNotNil(dict["stryju"])
+        s = dict["stryju"]!
+        XCTAssertEqual(UInt64(1681153044), s.characterID)
+        XCTAssertEqual("Brave Newbies Inc.", s.corporationName)
+        XCTAssertEqual(UInt64(98169165), s.corporationID)
+        XCTAssertEqual("Brave Collective", s.allianceName)
+        XCTAssertEqual(UInt64(99003214), s.allianceID)
+        XCTAssertEqual(UInt64(0), s.factionID)
+        XCTAssertEqual("", s.factionName)
+        
+        
+        XCTAssertNotNil(dict["Justine Mati"])
+        s = dict["Justine Mati"]!
+        XCTAssertEqual(UInt64(95304127), s.characterID)
+        XCTAssertEqual("My Random Corporation", s.corporationName)
+        XCTAssertEqual(UInt64(98325162), s.corporationID)
+        XCTAssertEqual(UInt64(0), s.allianceID)
+        XCTAssertEqual("", s.allianceName)
+        XCTAssertEqual(UInt64(0), s.factionID)
+        XCTAssertEqual("", s.factionName)
+    }
+    
 }
